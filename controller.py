@@ -1,21 +1,15 @@
-from flask import Flask, request, jsonify
-import model
+from flask import Flask, jsonify, request
+from model import model
 
 app = Flask(__name__)
 
 
-# @app.route('/calculateInterest', methods=['POST'])
-# def calculate_interest():
-#     data = request.json
-#     result = model.calculate_interest(data)
-#     res = {'total_return': result[0], 'monthly_return': result[1]}
-#     return res
-
-
-@app.route('/get_sp_500', methods=['GET'])
+@app.route('/calculateInterest', methods=['POST'])
 def calculate_interest():
-    return jsonify(model.get_sp_500())
+    data = request.json
+    result = model.calculate_interest(data)
+    return jsonify(result)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run('localhost', 3000)
